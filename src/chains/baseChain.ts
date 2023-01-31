@@ -3,9 +3,9 @@ import { IChainClient } from "./types/client";
 import { IChainTokenFileService } from "./types/tokenFileService";
 import { IChainTokenService } from "./types/tokenService";
 
-export class BaseChain {
+export interface IBaseChain {
     accountService: IChainAccountService
-    client: IChainClient;
-    tokenService: IChainTokenService;
+    _client: IChainClient;
     fileService: IChainTokenFileService;
+    tokenService: IChainTokenService;
 }
