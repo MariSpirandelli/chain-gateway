@@ -23,7 +23,7 @@ export default class Tokens {
 
     const chain = ChainFactory.getChainByNetwork(chainType);
 
-    const fileId = await chain.fileService.create({
+    const fileId = await chain.file.create({
       name,
       category,
       media,
@@ -37,20 +37,20 @@ export default class Tokens {
     });
 
     const tokenMaxSupply = maxSupply || quantity;
-    const tokenId = chain.tokenService.createNft({
+    const tokenId = chain.token.createNft({
       name,
       symbol: fileId || '',
       maxSupply: tokenMaxSupply,
     });
 
-    chain.tokenService.associate({
+    chain.token.associate({
       tokenIds: [tokenId],
       destinationAccountId: toAccountId,
       destinationAccountPrivateKey: toAccountPrivateKey,
       memo: fileId,
     });
 
-    await chain.tokenService.mintNft(tokenId, quantity, fileId);
+    await chain.token.mintNft(tokenId, quantity, fileId);
 
     return {
       fileId,
